@@ -1,0 +1,65 @@
+{% extends 'customer_dash.html' %}
+
+{% block content %}
+
+<style>
+    .custom-card {
+        background-color: PapayaWhip;
+    }
+
+    .search-form {
+        float: right;
+        margin-bottom: 10px; /* Adjust as needed */
+    }
+</style>
+
+<div class="row">
+
+    {% for message in messages %}
+        <div class="alert alert-primary" role="alert">
+            {{ message }}
+        </div>
+    {% endfor %}
+
+    <form method="get" class="form-inline search-form">
+        <div class="d-none d-md-flex ms-4">
+            {{ placeFilter.form }}
+            <br>
+            <button class="btn btn-primary mr-2" type="submit">Search</button>
+        </div>
+    </form>
+
+    {% for sales_rental in data %}
+        <div class="col-md-4 mb-4">
+
+            <div class="card ">
+                <div class="card custom-card" style="height:600px">
+                    <img src="{{ sales_rental.pic.url }}" height="200px" class="card-img-top" alt="Product Image">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ sales_rental.brand }}</h5>
+                        <p class="card-text">{{ sales_rental.description }}</p>
+                        <p>Type: {{ sales_rental.get_type_display }}</p>
+
+                        <h6 style="color: green;">
+                            Rate: {{sales_rental.rate}}
+                        </h6>
+                        <p>Contact No: {{ sales_rental.contact_no }}</p>
+                        <p style="color: green;" >Hurry..only {{ sales_rental.quantity }} left in stock!! </p>
+                        <p>Seller Name: {{ sales_rental.user }}</p>
+                        {% if sales_rental.quantity > 0 %}
+                            <p>Status: AVAILABLE</p>
+                        {% elif sales_rental.quantity == 0 %}
+                            <p style="color: red;">Status: OUT OF STOCK</p>
+                        {% endif %}
+                        {% if sales_rental.status1 == 0 and sales_rental.quantity > 0 %}
+                        <a type='button' href="{% url 'Add_to_cart' sales_rental.id %}" class="btn btn-primary">Order now</a>
+                           {% endif %}
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    {% endfor %}
+</div>
+
+{% endblock %}

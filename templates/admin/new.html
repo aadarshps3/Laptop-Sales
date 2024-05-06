@@ -1,0 +1,44 @@
+{% extends "admin_dash.html" %}
+
+
+{% block content %}
+
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Product Image</th>
+                <th>Brand</th>
+                <th>Description</th>
+                <th>Type</th>
+                <th>Rate</th>
+                <th>Contact No</th>
+                <th>Quantity Left</th>
+                <th>Seller Name</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for sales_rental in data %}
+            <tr>
+                <td><img src="{{ sales_rental.pic.url }}" height="100px" alt="Product Image"></td>
+                <td>{{ sales_rental.brand }}</td>
+                <td>{{ sales_rental.description }}</td>
+                <td>{{ sales_rental.get_type_display }}</td>
+                <td>{{ sales_rental.rate }}</td>
+                <td>{{ sales_rental.contact_no }}</td>
+                <td>{{ sales_rental.quantity }}</td>
+                <td>{{ sales_rental.user }}</td>
+                <td>{% if sales_rental.quantity > 0 %}
+                            <p>Status: AVAILABLE</p>
+                        {% elif sales_rental.quantity == 0 %}
+                            <p style="color: red;">Status: OUT OF STOCK</p>
+                        {% endif %}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+
+{% endblock %}

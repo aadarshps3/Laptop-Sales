@@ -1,0 +1,56 @@
+{% extends 'seller_dash.html' %}
+{% block content %}
+
+
+<div class="col-lg-10">
+    {% for message in messages %}
+    <div class="alert alert-primary" role="alert">
+        {{ message }}
+    </div>
+    {% endfor %}
+
+    <div class="row">
+        {% for n in ticket %}
+        <div class="col-lg-4">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <strong class="card-title">Booking</strong>
+                </div>
+                <div class="card-body">
+                    <div class="movie-ticket">
+                        <div class="ticket-info">
+                            <p><strong>Item:</strong> {{ n.sale.item }}</p>
+                            <p><strong>Type:</strong> {{ n.sale.type }}</p>
+                            <p><strong>rate:</strong> {{ n.sale.rate }}</p>
+                            <p><strong>Mobile:</strong> {{ n.mobile }}</p>
+
+                             <p><strong>Address:</strong> {{ n.address }}</p>
+                            <p><strong>Payment status:</strong>
+                                {% if n.status == 0 %}
+
+                                Not Paid
+
+                                {% elif n.status == 1 %}
+
+                                Paid
+                                {% endif %}
+                            </p>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% if forloop.counter|divisibleby:3 and not forloop.last %}
+    </div><div class="row">
+        {% endif %}
+
+
+        {% endfor %}
+    </div>
+</div>
+
+
+
+{% endblock %}

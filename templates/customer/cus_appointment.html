@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+{% extends 'customer_dash.html' %}
+
+{% block content %}
+
+<div class="col-lg-10">
+    {% for message in messages %}
+    <div class="alert alert-primary" role="alert">
+        {{message}}
+    </div>
+    {% endfor %}
+<!--    <div class="card">-->
+        <div class="card-header">
+            <strong class="card-title">BOOKING STATUS </strong>
+        </div>
+
+        <div class="card-body" >
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th scope="col">SI No</th>
+                    <th scope="col">Date</th>
+
+                    <th scope="col">Start Time</th>
+                    <th scope="col">End Time</th>
+                    <th scope="col">Location</th>
+
+                    <th scope="col">Status</th>
+                      <th scope="col">Payment Status</th>
+
+                </tr>
+                </thead>
+
+
+                <tbody>
+                {% for n in appointment %}
+                <tr>
+                    <th scope="row">{{forloop.counter}}</th>
+                    <td>{{n.schedule.date}}</td>
+                    <td>{{n.schedule.start_time}}</td>
+                    <td>{{n.schedule.end_time}}</td>
+                    <td>{{n.schedule.location}}</td>
+
+                    <td>
+                        {% if n.status == 0 %}
+                          <button type="button" class="btn btn-warning">Approval Pending</button>
+                        {% elif n.status == 1 %}
+                        <p>Please pay advance</p>
+
+
+                         {% elif n.status == 2 %}
+                        <h6>No slots available</h6>
+
+                          {% elif n.status == 3 %}
+                        <h6>booking completed</h6>
+ {% endif %}
+
+
+
+                    </td>
+
+                    <td>
+
+                           {% if n.status == 1 %}
+                       <a href = "{% url 'checkout_rental' n.id  %}" class="btn btn-outline-info">Pay Advance</a>
+
+                     {% elif n.status == 3 %}
+
+                          <h6>Paid</h6>
+
+
+                            {% endif %}
+                    </td>
+
+
+
+
+
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+<!--    </div>-->
+<!--</div>-->
+<script type="text/javascript">
+
+
+
+
+
+window.mytest = function()
+{ var isValid = confirm('Are you sure Want to Delete ?');if (!isValid) { event.preventDefault();
+  }}
+
+
+
+
+
+
+
+</script>
+{% endblock %}
