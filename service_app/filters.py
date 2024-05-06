@@ -3,7 +3,7 @@ from django import forms
 from django_filters import CharFilter
 
 
-from service_app.models import Sales_add, AppointmentSchedule
+from service_app.models import Sales_add, AppointmentSchedule, Rentals_add
 
 
 class PlaceFilter(django_filters.FilterSet):
@@ -12,6 +12,14 @@ class PlaceFilter(django_filters.FilterSet):
 
     class Meta:
         model = Sales_add
+        fields = ('location',)
+
+class PlaceFilters(django_filters.FilterSet):
+    location = CharFilter(label="", lookup_expr='icontains', widget=forms.TextInput(attrs={
+        'placeholder': 'Search location ', 'class': 'form-control'}))
+
+    class Meta:
+        model = Rentals_add
         fields = ('location',)
 
 

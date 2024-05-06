@@ -61,9 +61,10 @@
                 <div class="navbar-nav w-100">
 <!--                    <a href=" {% static 'dash/index.html' %} " class="nav-item nav-link active"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>-->
                     <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>sale and rentals</a>
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Sale/Rentals</a>
                         <div class="dropdown-menu bg-transparent border-0">
-                            <a href=" {% url 'cus_view_items' %} " class="dropdown-item">View</a>
+                            <a href=" {% url 'cus_view_items' %} " class="dropdown-item">View Sale</a>
+                            <a href=" {% url 'view_rentals_cus' %} " class="dropdown-item">View Rentals</a>
 <!--                            <a href=" {% static 'dash/typography.html' %} " class="dropdown-item">Typography</a>-->
 <!--                            <a href=" {% static 'element.html' %} " class="dropdown-item">Other Elements</a>-->
                         </div>

@@ -2,7 +2,8 @@ from django.contrib import messages
 from django.shortcuts import redirect,render
 
 from service_app.forms import ScheduleAdd
-from service_app.models import AppointmentSchedule, Appointment, Sales_add, Complaints, Customer, Seles_Rentals
+from service_app.models import AppointmentSchedule, Appointment, Sales_add, Complaints, Customer, Seles_Rentals, \
+    Rentals_add
 
 
 def customers(request):
@@ -79,6 +80,10 @@ def adm_view_items(request):
     data=Sales_add.objects.all()
 
     return render(request,'admin/new.html',{'data':data})
+
+def view_rental_pdcts(request):
+    data = Rentals_add.objects.all()
+    return render(request,'admin/view_rental_pdcts.html',{'data':data})
 
 
 

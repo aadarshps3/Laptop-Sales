@@ -45,26 +45,39 @@ class Appointment(models.Model):
 
 class Sales_add(models.Model):
     data= [
-
         ('Laptop', 'Laptop'),
         ('Tablets', 'Tablets'),
-
-
     ]
-    TYPE = [
-        ('Sale', 'Sale'),
-        ('Rental', 'Rental'),
-    ]
+    LISTING_TYPE = 'Sale'  # Add a field to indicate the listing type
     user = models.ForeignKey(Login_view, on_delete=models.CASCADE)
     item = models.CharField(max_length=50, choices=data)
-    type = models.CharField(max_length=50, choices=TYPE)
     location = models.CharField(max_length=50)
-    description= models.TextField()
+    description = models.TextField()
     rate = models.CharField(max_length=10)
     contact_no = models.CharField(max_length=100)
     pic = models.FileField(upload_to='pic/')
     status1 = models.BooleanField(default=0)
     quantity = models.PositiveIntegerField(default=0)
+    posted_date = models.DateField(auto_now=True)
+    listing_type = models.CharField(max_length=10, default=LISTING_TYPE)  # Add a field to indicate the listing type
+
+class Rentals_add(models.Model):
+    data= [
+        ('Laptop', 'Laptop'),
+        ('Tablets', 'Tablets'),
+    ]
+    LISTING_TYPE = 'Rental'  # Add a field to indicate the listing type
+    user = models.ForeignKey(Login_view, on_delete=models.CASCADE)
+    item = models.CharField(max_length=50, choices=data)
+    location = models.CharField(max_length=50)
+    description = models.TextField()
+    monthly_rent = models.CharField(max_length=10)
+    contact_no = models.CharField(max_length=100)
+    pic = models.FileField(upload_to='pics/')
+    status1 = models.BooleanField(default=0)
+    quantity = models.PositiveIntegerField(default=0)
+    posted_date = models.DateField(auto_now=True)
+    listing_type = models.CharField(max_length=10, default=LISTING_TYPE)  # Add a field to indicate the listing type
 
 
 class Cart(models.Model):

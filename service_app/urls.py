@@ -30,6 +30,7 @@ urlpatterns = [
 
  path('feedbacks', admin_views.feedbacks, name='feedbacks'),
  path('reply_feedback/<int:id>/',admin_views.reply_feedback,name = 'reply_feedback'),
+ path('view_rental_pdcts',admin_views.view_rental_pdcts,name = 'view_rental_pdcts'),
 
 
  #customer
@@ -39,6 +40,7 @@ urlpatterns = [
  path('cus_view_items',customer_views.cus_view_items,name='cus_view_items'),
  path('Add_to_cart/<int:id>/',customer_views.Add_to_cart,name="Add_to_cart"),
  path('My_list',customer_views.My_list,name='My_list'),
+ path('view_rentals_cus',customer_views.view_rentals_cus,name='view_rentals_cus'),
 
  path("feedback",customer_views.feedback,name="feedback"),
  path("feedback_view", customer_views.feedback_view, name="feedback_view"),
@@ -52,4 +54,11 @@ urlpatterns = [
  path('instock/<int:id>/', sales_views.instock, name='instock'),
  path('out_of_stock/<int:id>/',sales_views.out_of_stock, name='out_of_stock'),
  path("sale_Bookings",sales_views.Bookings,name = "sale_Bookings"),
+ path("add_rental",sales_views.add_rental,name = "add_rental"),
+ path("view_items_rental",sales_views.view_items_rental,name = "view_items_rental"),
+ path("instock_rentals/<int:id>/",sales_views.instock_rentals,name = "instock_rentals"),
+ path("out_of_stock_rentals/<int:id>/",sales_views.out_of_stock_rentals,name = "out_of_stock_rentals"),
+ path("generate_report",sales_views.generate_report,name = "generate_report"),
+ path("report_form",sales_views.report_form,name = "report_form"),
+ path('download_report/<str:start_date>/<str:end_date>/<str:listing_type>/', sales_views.download_report, name='download_report'),
 ]

@@ -1,0 +1,132 @@
+{% extends 'customer_dash.html' %}
+
+{% block content %}
+
+<style>
+    /* Custom card style */
+    .custom-card {
+        background-color: #F8F9FA; /* Soft gray background */
+        border: 1px solid #dee2e6; /* Light border */
+        border-radius: 10px; /* Rounded corners */
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+        transition: transform 0.3s; /* Smooth transition */
+    }
+
+    .custom-card:hover {
+        transform: translateY(-5px); /* Hover effect */
+    }
+
+    /* Search form style */
+    .search-form {
+        float: right;
+        margin-bottom: 10px;
+    }
+
+    /* Title style */
+    .card-title {
+        color: #343a40; /* Dark text color */
+        font-size: 1.25rem; /* Larger font size */
+        font-weight: bold; /* Bold font weight */
+        margin-bottom: 0.75rem; /* Adjusted spacing */
+    }
+
+    /* Text description style */
+    .card-text {
+        color: #6c757d; /* Gray text color */
+        font-size: 1rem; /* Normal font size */
+        margin-bottom: 1rem; /* Adjusted spacing */
+    }
+
+    /* Rate style */
+    .rate {
+        color: #28a745; /* Green color */
+        font-size: 1.1rem; /* Slightly larger font size */
+        font-weight: bold; /* Bold font weight */
+        margin-bottom: 0.5rem; /* Adjusted spacing */
+    }
+
+    /* Quantity left style */
+    .quantity-left {
+        color: #28a745; /* Green color */
+        font-size: 1rem; /* Normal font size */
+        font-weight: bold; /* Bold font weight */
+        margin-bottom: 0.5rem; /* Adjusted spacing */
+    }
+
+    /* Seller name style */
+    .seller-name {
+        color: #6c757d; /* Gray text color */
+        font-size: 0.9rem; /* Smaller font size */
+        margin-bottom: 0.5rem; /* Adjusted spacing */
+    }
+
+    /* Status style */
+    .status-available {
+        color: #28a745; /* Green color */
+        font-weight: bold; /* Bold font weight */
+        margin-bottom: 0.5rem; /* Adjusted spacing */
+    }
+
+    .status-out-of-stock {
+        color: #dc3545; /* Red color */
+        font-weight: bold; /* Bold font weight */
+        margin-bottom: 0.5rem; /* Adjusted spacing */
+    }
+
+    /* Order button style */
+    .order-btn {
+        background-color: #007bff; /* Primary blue color */
+        border-color: #007bff; /* Primary blue color */
+        color: #fff; /* White text color */
+        font-weight: bold; /* Bold font weight */
+        transition: background-color 0.3s; /* Smooth transition */
+    }
+
+    .order-btn:hover {
+        background-color: #0056b3; /* Darker blue color on hover */
+        border-color: #0056b3; /* Darker blue color on hover */
+    }
+</style>
+
+<div class="row">
+    {% for message in messages %}
+        <div class="alert alert-primary" role="alert">
+            {{ message }}
+        </div>
+    {% endfor %}
+
+  <form method="get" class="form-inline search-form">
+        <div class="d-none d-md-flex ms-4">
+            {{ placeFilters.form }}
+            <br>
+            <button class="btn btn-primary mr-2" type="submit">Search</button>
+        </div>
+    </form>
+
+    {% for sales_rental in data %}
+        <div class="col-md-4 mb-4">
+            <div class="card custom-card">
+                <img src="{{ sales_rental.pic.url }}" class="card-img-top" alt="Product Image" height="350px">
+                <div class="card-body">
+                    <h5 class="card-title">{{ sales_rental.brand }}</h5>
+                    <p class="card-text">Description:{{ sales_rental.description }}</p>
+                    <p>Location: {{ sales_rental.location }}</p>
+                    <h6 class="rate">Rate: {{sales_rental.monthly_rent}}</h6>
+                    <p>Contact No: {{ sales_rental.contact_no }}</p>
+                    <p class="quantity-left">Hurry..only {{ sales_rental.quantity }} left in stock!! </p>
+                    <p class="seller-name">Seller Name: {{ sales_rental.user }}</p>
+                    {% if sales_rental.quantity > 0 %}
+                        <p class="status-available">Status: AVAILABLE</p>
+                    {% else %}
+                        <p class="status-out-of-stock">Status: OUT OF STOCK</p>
+                    {% endif %}
+<!--                    {% if sales_rental.status1 == 0 and sales_rental.quantity > 0 %}-->
+<!--                        <a href="{% url 'Add_to_cart' sales_rental.id %}" class="btn btn-primary order-btn">Order now</a>-->
+<!--                    {% endif %}-->
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+
+{% endblock %}

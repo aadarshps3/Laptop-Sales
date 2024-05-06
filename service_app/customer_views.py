@@ -2,9 +2,9 @@ from django.contrib import messages
 from django.shortcuts import render, redirect
 
 from service_app import models
-from service_app.filters import PlaceFilter, AppointmentFilter
+from service_app.filters import PlaceFilter, AppointmentFilter, PlaceFilters
 from service_app.forms import FeedbackForm, PaymentsForm
-from service_app.models import AppointmentSchedule, Customer, Appointment, Sales_add, Cart, Complaints
+from service_app.models import AppointmentSchedule, Customer, Appointment, Sales_add, Cart, Complaints, Rentals_add
 
 
 def schedule_cus(request):
@@ -52,6 +52,7 @@ def cus_view_items(request):
     data = placeFilter.qs
 
     return render(request,'customer/cus_items.html',{'data':data,"placeFilter":placeFilter})
+
 
 
 def Add_to_cart(request, id):
@@ -179,3 +180,10 @@ def checkout_rental(request, id):
 
 
     return render(request, 'customer/checkout.html', {'n': n,'form':form})
+
+def view_rentals_cus(request):
+    data = Rentals_add.objects.all()
+    placeFilters = PlaceFilters(request.GET, queryset=data)
+    data = placeFilters.qs
+
+    return render(request,'customer/view_rentals_cus.html',{'data':data,"placeFilters":placeFilters})

@@ -3,7 +3,8 @@ import datetime
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 
-from service_app.models import Login_view, Customer, Seles_Rentals, AppointmentSchedule, Sales_add, Complaints, Payments
+from service_app.models import Login_view, Customer, Seles_Rentals, AppointmentSchedule, Sales_add, Complaints, \
+    Payments, Rentals_add
 
 
 class LoginRegister(UserCreationForm):
@@ -75,6 +76,12 @@ class FeedbackForm(forms.ModelForm):
 class SalesRentalsForm(forms.ModelForm):
     class Meta:
         model = Sales_add
+        fields = '__all__'
+        exclude = ('user','status1')
+
+class RentalsForm(forms.ModelForm):
+    class Meta:
+        model = Rentals_add
         fields = '__all__'
         exclude = ('user','status1')
 

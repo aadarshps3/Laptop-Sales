@@ -1,0 +1,92 @@
+{% extends 'seller_dash.html' %}
+
+{% block content %}
+
+
+
+<style>
+    .custom-card {
+        background-color: PapayaWhip;
+    }
+
+    .search-form {
+        float: right;
+        margin-bottom: 10px; /* Adjust as needed */
+    }
+</style>
+
+<div class="row">
+
+    {% for message in messages %}
+        <div class="alert alert-primary" role="alert">
+            {{ message }}
+        </div>
+    {% endfor %}
+
+
+
+    {% for sales_rental in data %}
+        <div class="col-md-4 mb-4">
+
+            <div class="card">
+                <div class="card custom-card" style="height:600px" >
+                    <img src="{{ sales_rental.pic.url }}" height="200px" class="card-img-top" alt="Product Image">
+                    <div class="card-body">
+<!--                        <h5 class="card-title">{{ sales_rental.brand }}</h5>-->
+                        <p class="card-text">Location:{{ sales_rental.location }}</p>
+                        <p class="card-text"></p>
+                        <p>Monthly Rent: {{ sales_rental.monthly_rent }}</p>
+                        <p>Contact No: {{ sales_rental.contact_no }}</p>
+
+                         <p style="color: green;" >Only {{ sales_rental.quantity }} left in stock!! </p>
+<!--                        {% if sales_rental.status1 >= 0 %}-->
+<!--                            <p>Status: AVAILABLE</p>-->
+<!--                        {% elif sales_rental.status1 == 1 %}-->
+<!--                            <p style="color: red;">Status: OUT OF STOCK</p>-->
+<!--                        {% endif %}-->
+                        {% if sales_rental.quantity > 0 %}
+                    <p>Status: AVAILABLE</p>
+                {% elif sales_rental.quantity == 0 %}
+                    <p style="color:red">Status: OUT OF STOCK</p>
+                {% endif %}
+<!--                <a type='button' href="{% url 'instock' sales_rental.id %}" class="btn btn-primary">IN STOCK</a>-->
+<!--                <a type='button' href="{% url 'out_of_stock' sales_rental.id %}" class="btn btn-primary">OUT OF STOCK</a>-->
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    {% endfor %}
+</div>
+
+
+<!--<div class="row">-->
+<!--    {% for sales_rental in data %}-->
+<!--    <div class="col-md-4 mb-4">-->
+<!--        <div class="card">-->
+<!--            <img src="{{ sales_rental.pic.url }}" class="card-img-top" alt="Product Image">-->
+<!--            <div class="card-body">-->
+<!--                <h5 class="card-title">{{ sales_rental.item }}</h5>-->
+<!--                <p class="card-text">{{ sales_rental.description }}</p>-->
+<!--                <p>Type: {{ sales_rental.type }}</p>-->
+<!--                <p>Contact No: {{ sales_rental.contact_no }}</p>-->
+<!--                <p>Rate: {{ sales_rental.rate }}</p>-->
+
+
+<!--                <p>sellername: {{ sales_rental.user }}</p>-->
+<!--                <p style="color: green;" >0nly {{ sales_rental.quantity }} left in stock!! </p>-->
+<!--                {% if sales_rental.status1 == 0 %}-->
+<!--                    <p>Status: AVAILABLE</p>-->
+<!--                {% elif sales_rental.status1 == 1 %}-->
+<!--                    <p style="color:red">Status: OUT OF STOCK</p>-->
+<!--                {% endif %}-->
+<!--                <a type='button' href="{% url 'instock' sales_rental.id %}" class="btn btn-primary">IN STOCK</a>-->
+<!--                <a type='button' href="{% url 'out_of_stock' sales_rental.id %}" class="btn btn-primary">OUT OF STOCK</a>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    {% endfor %}-->
+<!--</div>-->
+
+{% endblock %}
